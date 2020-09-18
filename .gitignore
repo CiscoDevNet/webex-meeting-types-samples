@@ -1,0 +1,7 @@
+node_modules
+core
+icons
+dist
+parcel/.cache/
+cert.pem
+key.pem

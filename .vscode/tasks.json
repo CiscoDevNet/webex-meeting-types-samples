@@ -1,0 +1,51 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        {
+            "label": "start web server",
+            "type": "shell",
+            "command": "./node_modules/.bin/lite-server -c 'lite-server config.json'",
+            "isBackground": true,
+            "promptOnClose": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".",
+                        "endsPattern": "^.*\\Serving files.*$"
+                    }
+                }
+            ],
+        },
+        {
+            "label": "stop web server",
+            "type": "shell",
+            "command": "pkill -f lite-server",
+            "promptOnClose": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            }
+        }
+    ]
+}

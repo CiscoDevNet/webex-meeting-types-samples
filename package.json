@@ -1,0 +1,30 @@
+{
+    "name": "webex-js-sdk-bundling-examples",
+    "version": "1.0.0",
+    "description": "Demonstrates implementing various Webex meeting types embedded in a browser application.",
+    "scripts": {
+        "build": "bash -c ./webpack/webpack.sh",
+        "server": "lite-server --port 3000 --baseDir=webpack"
+    },
+    "author": "David Staudt <dstaudt@cisco.com>",
+    "license": "MIT",
+    "dependencies": {
+        "@babel/core": "^7.11.6",
+        "@babel/polyfill": "^7.11.5",
+        "@babel/preset-env": "^7.11.5",
+        "@momentum-ui/core": "^19.9.11",
+        "@momentum-ui/icons": "^7.53.0",
+        "babelify": "^10.0.0",
+        "webex": "^1.94.2",
+        "webpack": "^4.44.2"
+    },
+    "browserslist": [
+        "last 2 Firefox versions",
+        "last 2 Chrome versions",
+        "last 1 Safari versions"
+    ],
+    "devDependencies": {
+        "lite-server": "^2.5.4",
+        "webpack-cli": "^3.3.12"
+    }
+}
