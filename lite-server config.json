@@ -1,6 +1,6 @@
 {
     "port": 3000,
     "open": false,
-    "files": ["./webpack/index.html", "./webpack/index.js"],
+    "files": ["./webpack/index.html", "./webpack/dist/app.bundle.js"],
     "server": { "baseDir": "./webpack" }
   }

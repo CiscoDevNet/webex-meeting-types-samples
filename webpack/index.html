@@ -28,6 +28,10 @@
         tbody td {
             min-width: 150px;
         }
+
+        .statustext {
+            font-style: italic;
+        }
     </style>
 </head>
 
@@ -56,58 +60,88 @@
         <form id="credentials">
             <fieldset>
                 <legend>Caller Access Token</legend>
-                <input id="access-token" name="accessToken" placeholder="Your access token" type="text">
-                <input id="connect" title="connect" type="submit" value="connect">
-                <p id="connection-status">disconnected</p>
+                <input type="text" id="access-token" name="access-token">
+                <button id="btnConnect">Connect</button>
+                <small>
+                    <p id="pConnectionStatus" class='statustext'>Disconnected</p>
+                </small>
             </fieldset>
         </form>
 
-        <form id="dialer">
+        <fieldset>
+            <legend>Destination</legend>
             <fieldset>
-                <legend>Destination</legend>
-                <input type="radio" id="dialByEmail" name="dialBy"/>
-                    <input type="text" id="txtDialByEmail"/>
-                        <label for="dialByEmail">Person Email</label>
-                            <input type="button" id="btnRetrieveInvitee" name="btnRetrieveINitee" value="Retrieve Id"/><br>
-                <input type="radio" id="dialByPersonId" name="dialBy"/>
-                    <input type="text" id="txtDialByUserId"/>
-                        <label for="dialByUserId">User Id</label><br>
-                <input type="radio" id="dialByRoomId" name="dialBy"/>
-                    <input type="text" id="txtDialByRoomId"/>
-                        <label for="dialByRoomId">Room Id</label>
-                        <input type="button" id="btnCreateRoom" name="btnCreateRoom" value="Create Test Room"/><br>
-                <input type="radio" id="dialByPmr" name="dialBy"/>
-                    <input type="text" id="txtDialByPmr"/>
-                        <label for="dialByPmr">PMR URL</label>
-                            <input type="button" id="btnRetrievePmr" value="Retrieve Caller's PMR"/><br>
-                <input type="radio" id="dialByMeeting" name="dialBy"/>
-                    <input type="text" id="txtDialByMeeting"/>
-                        <label for="dialByMeeting">Meeting URL</label>
-                        <input type="button" id="btnCreateMeeting" value="Create Test Meeting"/><br>
-                <input type="radio" id="dialBySip" name="dialBy"/>
-                    <input type="text" id="txtDialBySip"/>
-                        <label for="dialBySip">SIP URI</label><br>
-                <input type="radio" id="dialByNumber" name="dialBy"/>
-                    <input type="text" id="txtDialByNumber"/>
-                        <label for="dialByNumber">Phone Number</label><br>
-                <input title="dial" type="submit" value="dial">
+                <legend>User</legend>
+                <div id="byUser">
+                    <input type="radio" id="dialByEmail" name="dialBy" checked />
+                    <input type="text" id="txtDialByEmail" />
+                    <label for="dialByEmail">Person Email</label>
+                    <input type="button" id="btnRetrieveInvitee" name="btnRetrieveINitee"
+                        value="Retrieve User Info" /><br>
+                </div>
+                <div id="byPersonId">
+                    <input type="radio" id="dialByPersonId" name="dialBy" />
+                    <input type="text" id="txtDialByUserId" />
+                    <label for="dialByUserId">User Id</label><br>
+                </div>
+                <div id="byNumber">
+                    <input type="radio" id="dialByNumber" name="dialBy" />
+                    <input type="text" id="txtDialByNumber" />
+                    <label for="dialByNumber">Phone Number</label><br>
+                </div>
             </fieldset>
-        </form>
-
-        <form id="constraints">
             <fieldset>
-                <legend>Constraints</legend>
-                <input id="constraints-audio" title="audio" type="checkbox" checked>
-                <label for="constraints-audio">Audio</label>
-                <input id="constraints-video" title="video" type="checkbox" checked>
-                <label for="constraints-video">Video</label>
+                <legend>Space</legend>
+                <div id="byRoomId">
+                    <input type="radio" id="dialByRoomId" name="dialBy" />
+                    <input type="text" id="txtDialByRoomId" />
+                    <label for="dialByRoomId">Room Id</label>
+                    <input type="button" id="btnCreateRoom" name="btnCreateRoom" value="Create Test Room" /><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Scheduled Meeting</legend>
+                <div id="byMeetingUrl">
+                    <input type="radio" id="dialByMeeting" name="dialBy" />
+                    <input type="text" id="txtDialByMeeting" />
+                    <label for="dialByMeeting">Meeting URL</label>
+                    <input type="button" id="btnCreateMeeting" value="Create Test Meeting" /><br>
+                    <input type="radio" id="dialBySip" name="dialBy" />
+                    <input type="text" id="txtDialBySip" />
+                    <label for="dialBySip">SIP URI</label><br>
+                    <input type="radio" id="dialBySip" name="dialBy" />
+                    <input type="text" id="txtDialBySip" />
+                    <label for="dialBySip">SIP URI</label><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div id="byPmrUrl">
+                    <legend>Personal Meeting Room</legend>
+                    <input type="radio" id="dialByPmr" name="dialBy" />
+                    <input type="text" id="txtDialByPmr" />
+                    <label for="dialByPmr">PMR URL</label>
+                    <input type="button" id="btnRetrievePmr" value="Retrieve Caller's PMR" /><br>
+                </div>
+            </fieldset>
+        </fieldset>
+
+        <form id="settings">
+            <fieldset>
+                <legend>Settings</legend>
+                <input id="cbAudio" type="checkbox" checked>
+                <label for="cbAudio">Audio</label>
+                <input id="cbVideo" type="checkbox" checked>
+                <label for="cbVideo">Video</label>
+                <input id="cbLocal" type="checkbox" checked>
+                <label for="cbLocal">Self View</label>
             </fieldset>
         </form>
 
         <form id="call-controls">
             <fieldset>
                 <legend>Call Controls</legend>
-                <button id="hangup" title="hangup" type="button">cancel/hangup</button>
+                <button id="btnDial">Dial</button>
+                <button id="btnHangup" title="hangup">Hangup</button>
             </fieldset>
         </form>
 
@@ -138,8 +172,7 @@
         </div>
     </main>
 
-    <!-- sample1.js is your application code -->
-    <script src="./dist/index.js"></script>
+    <script src="./dist/app.bundle.js"></script>
 </body>
 
 </html>

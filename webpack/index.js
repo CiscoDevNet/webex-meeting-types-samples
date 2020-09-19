@@ -9,7 +9,7 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable arrow-body-style */
 
-import { init as initWebex } from 'webex';
+import {init as initWebex } from 'webex';
 
 // Declare some globals that we'll need throughout
 let webex;
@@ -19,7 +19,7 @@ let webex;
 
 [
   'access-token',
-  'invitee'
+  'txtDialByEmail'
 ].forEach((id) => {
   const el = document.getElementById(id);
 
@@ -74,10 +74,7 @@ function connect() {
         // Sync our meetings with existing meetings on the server
         .then(() => webex.meetings.syncMeetings())
         .then(() => {
-          // This is just a little helper for our selenium tests and doesn't
-          // really matter for the example
-          document.body.classList.add('listening');
-          document.getElementById('connection-status').innerHTML = 'connected';
+          document.getElementById('pConnectionStatus').innerHTML = 'Connected';
           // Our device is now connected
           resolve();
         })
@@ -159,7 +156,7 @@ function bindMeetingEvents(meeting) {
   });
 
   // Of course, we'd also like to be able to end the call:
-  document.getElementById('hangup').addEventListener('click', () => {
+  document.getElementById('btnHangup').addEventListener('click', () => {
     meeting.leave();
   });
 }
@@ -168,8 +165,8 @@ function bindMeetingEvents(meeting) {
 function joinMeeting(meeting) {
   // Get constraints
   const constraints = {
-    audio: document.getElementById('constraints-audio').checked,
-    video: document.getElementById('constraints-video').checked
+    audio: document.getElementById('cbAudio').checked,
+    video: document.getElementById('cbVideo').checked
   };
 
   return meeting.join().then(() => {
@@ -201,18 +198,14 @@ function joinMeeting(meeting) {
 }
 
 // Now, let's set up incoming call handling
-document.getElementById('credentials').addEventListener('submit', (event) => {
-  // let's make sure we don't reload the page when we submit the form
-  event.preventDefault();
+document.getElementById('btnConnect').addEventListener('click', (event) => {
 
   // The rest of the incoming call setup happens in connect();
   connect();
 });
 
 // And finally, let's wire up dialing
-document.getElementById('dialer').addEventListener('submit', (event) => {
-  // again, we don't want to reload when we try to dial
-  event.preventDefault();
+document.getElementById('btnDial').addEventListener('click', (event) => {
 
   const destination = document.getElementById('invitee').value;
 
@@ -240,8 +233,8 @@ document.getElementById('dialer').addEventListener('submit', (event) => {
 // for Audio and Video constraints
 window.addEventListener('load', () => {
   // Get elements from the DOM
-  const audio = document.getElementById('constraints-audio');
-  const video = document.getElementById('constraints-video');
+  const audio = document.getElementById('cbAudio');
+  const video = document.getElementById('cbVideo');
 
   // Get access to hardware source of media data
   // For more info about enumerateDevices: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/enumerateDevices
