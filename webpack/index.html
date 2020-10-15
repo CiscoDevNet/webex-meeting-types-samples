@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Sample: Webex Meeting Type Samples</title>
+    <title>Sample: Webex Meeting Types Samples</title>
     <link rel="stylesheet" href="./core/css/momentum-ui.css">
     <style>
         main {
@@ -32,6 +32,46 @@
         .statustext {
             font-style: italic;
         }
+
+        #videoContainer {
+            width: auto;
+            overflow: hidden;
+            position: relative;
+            background: black;
+            margin-top: 13px;
+        }
+
+        #remoteView {
+            width: 100%;
+        }
+
+        #selfView {
+            background-color: black;
+            width: 25%;
+            height: 25%;
+            z-index: 2;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        #divSelfViewMessage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: gray;
+            width: 25%;
+            height: 25%;
+            z-index: 3;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .destinationSection {
+            display: flex;
+            align-items: baseline;
+        }
     </style>
 </head>
 
@@ -54,98 +94,133 @@
         </div>
     </header>
     <main>
-        <h1>Webex Voice/Video Meeting and Calling</h1>
-        <p>This sample demonstrates 1:1 calling, ad hoc Space group calling, and joining scheduled meetings and PMRs.
-        </p>
-        <form id="credentials">
+        <div style="float: left;">
             <fieldset>
                 <legend>Caller Access Token</legend>
-                <input type="text" id="access-token" name="access-token">
-                <button id="btnConnect">Connect</button>
+                <div>
+                    <button id="btnConnect" class="md-button md-button--blue" style="float: right;">Connect</button>
+                    <div style="overflow: hidden; padding: 3px; padding-right: 10px">
+                        <input id="txtAccessToken" class="md-input">
+                    </div>
+                </div>
                 <small>
                     <p id="pConnectionStatus" class='statustext'>Disconnected</p>
                 </small>
             </fieldset>
-        </form>
 
-        <fieldset>
-            <legend>Destination</legend>
-            <fieldset>
-                <legend>User</legend>
-                <div id="byUser">
-                    <input type="radio" id="dialByEmail" name="dialBy" checked />
-                    <input type="text" id="txtDialByEmail" />
-                    <label for="dialByEmail">Person Email</label>
-                    <input type="button" id="btnRetrieveInvitee" name="btnRetrieveINitee"
-                        value="Retrieve User Info" /><br>
-                </div>
-                <div id="byPersonId">
-                    <input type="radio" id="dialByPersonId" name="dialBy" />
-                    <input type="text" id="txtDialByUserId" />
-                    <label for="dialByUserId">User Id</label><br>
-                </div>
-                <div id="byNumber">
-                    <input type="radio" id="dialByNumber" name="dialBy" />
-                    <input type="text" id="txtDialByNumber" />
-                    <label for="dialByNumber">Phone Number</label><br>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Space</legend>
-                <div id="byRoomId">
-                    <input type="radio" id="dialByRoomId" name="dialBy" />
-                    <input type="text" id="txtDialByRoomId" />
-                    <label for="dialByRoomId">Room Id</label>
-                    <input type="button" id="btnCreateRoom" name="btnCreateRoom" value="Create Test Room" /><br>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Scheduled Meeting</legend>
-                <div id="byMeetingUrl">
-                    <input type="radio" id="dialByMeeting" name="dialBy" />
-                    <input type="text" id="txtDialByMeeting" />
-                    <label for="dialByMeeting">Meeting URL</label>
-                    <input type="button" id="btnCreateMeeting" value="Create Test Meeting" /><br>
-                    <input type="radio" id="dialBySip" name="dialBy" />
-                    <input type="text" id="txtDialBySip" />
-                    <label for="dialBySip">SIP URI</label><br>
-                    <input type="radio" id="dialBySip" name="dialBy" />
-                    <input type="text" id="txtDialBySip" />
-                    <label for="dialBySip">SIP URI</label><br>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div id="byPmrUrl">
+            <fieldset id="fsDestination">
+                <legend>Destination</legend>
+                <fieldset>
+                    <legend>User</legend>
+                    <div id="byUser" class="destinationSection">
+                        <div class="md-input-container md-radio">
+                            <input type="radio" class="md-input md-radio__input" id="dialByEmail" name="dialBy" checked
+                                disabled />
+                            <label class="md-radio__label" for="dialByEmail">Person Email</label>
+                        </div>
+                        <div style="padding: 5px;">
+                            <input type="text" id="txtDialByEmail" class="md-input" disabled>
+                        </div>
+                        <input type="button" id="btnRetrieveInvitee" class="md-button md-button--blue"
+                            value="Retrieve Id" disabled>
+                    </div>
+                    <div id="byPersonId" class="destinationSection">
+                        <div class="md-input-container md-radio">
+                            <input type="radio" class="md-input md-radio__input" id="dialByPersonId" name="dialBy"
+                                disabled />
+                            <label class="md-radio__label" for="dialByPersonId">Person Id</label>
+                        </div>
+                        <div style="padding: 5px;">
+                            <input type="text" id="txtDialByUserId" class="md-input" disabled />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Space</legend>
+                    <div id="byRoomId" class="destinationSection">
+                        <div class="md-input-container md-radio">
+                            <input type="radio" class="md-input md-radio__input" id="dialByRoomId" name="dialBy"
+                                disabled />
+                            <label class="md-radio__label" for="dialByRoomId">Room Id</label>
+                        </div>
+                        <div style="padding: 5px;">
+                            <input type="text" id="txtDialByRoomId" class="md-input" disabled>
+                        </div>
+                        <input type="button" id="btnCreateRoom" class="md-button md-button--blue"
+                            value="Create Test Space" disabled>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Scheduled Meeting</legend>
+                    <div id="byMeetingUrl" class="destinationSection">
+                        <div class="md-input-container md-radio">
+                            <input type="radio" class="md-input md-radio__input" id="dialByMeeting" name="dialBy"
+                                disabled />
+                            <label class="md-radio__label" for="dialByMeeting">Meeting URL</label>
+                        </div>
+                        <div style="padding: 5px;">
+                            <input type="text" id="txtDialByMeeting" class="md-input" disabled>
+                        </div>
+                        <input type="button" id="btnCreateMeeting" class="md-button md-button--blue"
+                            value="Create Test Meeting" disabled>
+                    </div>
+                    <div id="bySipUri" class="destinationSection">
+                        <div class="md-input-container md-radio">
+                            <input type="radio" class="md-input md-radio__input" id="dialBySip" name="dialBy"
+                                disabled />
+                            <label class="md-radio__label" for="dialBySip">SIP URI</label>
+                        </div>
+                        <div style="padding: 5px;">
+                            <input type="text" id="txtDialBySip" class="md-input" disabled>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
                     <legend>Personal Meeting Room</legend>
-                    <input type="radio" id="dialByPmr" name="dialBy" />
-                    <input type="text" id="txtDialByPmr" />
-                    <label for="dialByPmr">PMR URL</label>
-                    <input type="button" id="btnRetrievePmr" value="Retrieve Caller's PMR" /><br>
-                </div>
+                    <div id="byPmrUrl" class="destinationSection">
+                        <div class="md-input-container md-radio">
+                            <input type="radio" class="md-input md-radio__input" id="dialByPmr" name="dialBy"
+                                disabled />
+                            <label class="md-radio__label" for="dialByPmr">PMR URL</label>
+                        </div>
+                        <div style="padding: 5px;">
+                            <input type="text" id="txtDialByPmr" class="md-input" disabled>
+                        </div>
+                        <input type="button" id="btnRetrievePmr" class="md-button md-button--blue"
+                            value="Retrieve Caller's PMR" disabled>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Webex Calling</legend>
+                    <div id="byNumber" class="destinationSection">
+                        <div class="md-input-container md-radio">
+                            <input type="radio" class="md-input md-radio__input" id="dialByNumber" name="dialBy"
+                                disabled />
+                            <label class="md-radio__label" for="dialByNumber">Phone Number</label>
+                        </div>
+                        <div style="padding: 5px;">
+                            <input type="text" id="txtDialByNumber" class="md-input" disabled>
+                        </div>
+                    </div>
+                </fieldset>
             </fieldset>
+        </div>
+        <div id="videoContainer">
+            <audio id="remoteAudio" autoplay playsinline></audio>
+            <video id="remoteView" autoplay playsinline></video>
+            <video id="selfView" muted autoplay playsinline></video>
+            <div id="divSelfViewMessage">Video Muted</div>
+        </div>
+        <fieldset>
+            <legend>Call Controls</legend>
+            <button id="btnDial" class="md-button md-button--blue" disabled>Dial</button>
+            <button id="btnHangup" class="md-button md-button--blue" disabled>Hangup</button>
+            <input id="cbAudio" type="checkbox">
+            <label for="cbAudio">Microphone</label>
+            <input id="cbVideo" type="checkbox">
+            <label for="cbVideo">Camera</label>
         </fieldset>
-
-        <form id="settings">
-            <fieldset>
-                <legend>Settings</legend>
-                <input id="cbAudio" type="checkbox" checked>
-                <label for="cbAudio">Audio</label>
-                <input id="cbVideo" type="checkbox" checked>
-                <label for="cbVideo">Video</label>
-                <input id="cbLocal" type="checkbox" checked>
-                <label for="cbLocal">Self View</label>
-            </fieldset>
-        </form>
-
-        <form id="call-controls">
-            <fieldset>
-                <legend>Call Controls</legend>
-                <button id="btnDial">Dial</button>
-                <button id="btnHangup" title="hangup">Hangup</button>
-            </fieldset>
-        </form>
-
-        <table id="call-status">
+        <table id="call-status" class="statustext">
             <thead>
                 <tr>
                     <th colspan="2">Call Status</th>
@@ -154,24 +229,15 @@
             <tbody>
                 <tr>
                     <td>Local Participant</td>
-                    <td id="call-status-local"></td>
+                    <td id="callStatusLocal"></td>
                 </tr>
                 <tr>
                     <td>Remote Participant</td>
-                    <td id="call-status-remote"></td>
+                    <td id="callStatusRemote"></td>
                 </tr>
             </tbody>
         </table>
-
-        <div style="display: flex">
-            <video style="width:50%" id="self-view" muted autoplay playsinline></video>
-            <div style="width:50%">
-                <audio id="remote-view-audio" autoplay playsinline></audio>
-                <video id="remote-view-video" autoplay playsinline></video>
-            </div>
-        </div>
     </main>
-
     <script src="./dist/app.bundle.js"></script>
 </body>
 
