@@ -1,16 +1,21 @@
-# webex-js-sdk-bundling-examples
+# webex-meeting-types-samples
 
 ## Overview
 
-Demonstrates 'webpack' bundling of the Webex JavaScript SDK and [Momentum-UI](https://github.com/momentum-design/momentum-ui/) style assets for use in browser application integrations.
+Demonstrates 'webpack' bundling of the Webex JavaScript SDK and [Momentum-UI](https://github.com/momentum-design/momentum-ui/) style assets for use in browser voice/video meeting application integrations.  The resulting page/bundle is served via a simple light web server as a single-page app.
 
-Bundling frameworks demonstrated:
+Includes examples of accessing/joining various meeting types, including:
+
+* 1:1 Webex cloud calling
+* Space multi-user cloud calling
+* Scheduling and joining Webex scheduling meetings
+* PMR meetings
+* Webex Calling/PSTN dialing
+* SIP calling/meetings
+
+Bundling framework demonstrated:
 
 * [Webpack](https://webpack.js.org/)
-
-* [Parcel](https://parceljs.org/)
-
-* [Browserify](http://browserify.org/)
 
 >This project was built/tested using:
 
@@ -25,37 +30,25 @@ Bundling frameworks demonstrated:
 1. From a terminal, clone this repo using `git`:
 
     ```bash
-    git clone https://github.com/CiscoDevNet/webex-js-sdk-bundling-examples.git
+    git clone https://github.com/CiscoDevNet/webex-meeting-types-samples.git
     ```
 
 1. Install dependencies:
 
     ```bash
-    cd webex-js-sdk-bundling-examples
+    cd webex-meeting-types-samples
     npm install
     ```
 
-1. Use [OpenSSL](https://www.openssl.org/)] to create a self-signed key/certificate pair for serving pages with HTTPS:
+1. Open the project in VS Code:
 
     ```bash
-    openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+    code .
     ```
 
-1. Build and serve the sample web page using one of the available bundlers:
+1. In VS Code, launch the app by selecting the **Run** tab and clicking the green run button, or simply press **F5**   
 
-    ```bash
-    npm run webpack
-    ```
-
-    ```bash
-    npm run browserify
-    ```
-
-    ```bash
-    npm run parcel
-    ```
-
-1. Open a web browser and navigate to [https://localhost:3000](https://localhost:3000)
+1. If Google Chrome is installed, it should open and navigate to [https://localhost:3000](https://localhost:3000), otherwise you may need to do this manually.
 
 1. You can test the sample by logging into [developer.webex.com](https://developer.webex.com) and grabbing a Personal Access Token from the [Getting Started](https://developer.webex.com/docs/api/getting-started) page, then dialing another Webex Teams user via their Webex Id/email
 
