@@ -18,13 +18,15 @@
         "node-fetch": "^2.6.1",
         "remove": "^0.1.5",
         "webex": "^1.94.2",
-        "webpack": "^4.44.2",
-        "lite-server": "^2.5.4",
-        "webpack-cli": "^3.3.12"
+        "webpack": "^4.44.2"
     },
     "browserslist": [
         "last 2 Firefox versions",
         "last 2 Chrome versions",
         "last 1 Safari versions"
-    ]
+    ],
+    "devDependencies": {
+        "lite-server": "^2.5.4",
+        "webpack-cli": "^3.3.12"
+    }
 }
