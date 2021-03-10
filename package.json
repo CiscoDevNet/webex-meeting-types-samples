@@ -1,5 +1,5 @@
 {
-    "name": "webex-js-sdk-bundling-examples",
+    "name": "webex-meeting-types-samples",
     "version": "1.0.0",
     "description": "Demonstrates implementing various Webex meeting types embedded in a browser application.",
     "scripts": {
